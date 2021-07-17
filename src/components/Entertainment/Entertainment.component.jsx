@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 const EntertainmentCard=(props)=>{
     return (
     <>
-        <div className="w-full h-30 px-3">
+        <div className="w-full h-26 px-1 lg:px-5 ">
             <img className="w-full h-full rounded-xl" src={props.src} alt="entertainment Image"/>
         </div>
     </>
