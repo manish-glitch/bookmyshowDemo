@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
  const PosterSlider = (props) => {
+     const sliderConfig = props.config ? props.config : PosterCarouselSettings;
     return (
         <>
             <div className="flex flex-col items-start mt-1 mb-5 gap-1.5">
@@ -17,7 +18,7 @@ import "slick-carousel/slick/slick-theme.css";
                     props.isDark ? "text-white" : "text-gray-800"
                 }`}>{props.subtitle}</p>
             </div>
-            <Slider {...PosterCarouselSettings}>
+            <Slider {...sliderConfig}>
                 {props.images.map((image)=>(
                     <Poster {...image} isDark={props.isDark}/>
                 ))}
