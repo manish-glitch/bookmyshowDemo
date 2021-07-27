@@ -1,4 +1,5 @@
-import React from "react" ;
+import React, {useState, useEffect} from "react" ;
+import axios from "axios";
 
 import EntertainmentCardSlider from "../components/Entertainment/Entertainment.component";
 
@@ -8,11 +9,40 @@ import PosterSlider from "../components/PosterSlider/PosterSlider.component"
 import TempImages from "../Config/TempPosters.config"
 
 const HomePage=()=>{
+    const [popularMovies, setPopularMovies]=useState([]);
+    const [topRatedMovies, setTopRatedMovies]=useState([]);
+    const [upcomingMovies, setUpcomingMovies]=useState([]);
+
+    useEffect(()=>{
+        const requestPopularMovies=async()=>{
+            const getPopularMovies= await axios.get("/movie/popular");
+            console.log(getPopularMovies);
+            setPopularMovies(getPopularMovies.data.results);
+        }
+        requestPopularMovies();
+    },[])
+    useEffect(()=>{
+        const requestTopRatedMovies=async()=>{
+            const getTopRatedMovies= await axios.get("/movie/top_rated");
+            
+            setTopRatedMovies(getTopRatedMovies.data.results);
+        }
+        requestTopRatedMovies();
+    },[])
+    useEffect(()=>{
+        const requestUpcomingMovies=async()=>{
+            const getUpcomingMovies= await axios.get("/movie/upcoming");
+            
+            setUpcomingMovies(getUpcomingMovies.data.results);
+        }
+        requestUpcomingMovies();
+    },[])
+
     return(
         <>
             <div className="flex flex-col gap-10">
                 <div className="container mx-auto px-5">
-                    <h1 className="md:text-3xl font-bold text-gray-800 my-3 px-3 ">
+                    <h1 className="text-xl md:text-3xl font-bold text-gray-800 my-3 px-3 ">
                         The Best of Entertainment</h1>
                     <EntertainmentCardSlider/>
                 
@@ -28,7 +58,7 @@ const HomePage=()=>{
                         />
                     </div>
                         <PosterSlider 
-                            images={TempImages} 
+                            images={popularMovies} 
                             title="Premiers"
                             subtitle="New releases every Friday"
                             isDark
@@ -38,14 +68,14 @@ const HomePage=()=>{
             </div>
             <div className="container mx-auto px-4 my-8">
             <PosterSlider 
-                images={TempImages} 
+                images={topRatedMovies} 
                 title="Online Streaming Events"
                 isDark={false}
                 />
             </div>
             <div className="container mx-auto px-4 my-8">
                 <PosterSlider 
-                    images={TempImages} 
+                    images={upcomingMovies} 
                     title="Outdoor Events"
                     isDark={false}
                 />

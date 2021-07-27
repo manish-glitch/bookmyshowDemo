@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
     return (
         <>
             <div className="flex flex-col items-start mt-1 mb-5 gap-1.5">
-                <h1 className={`text-4xl font-bold ${
+                <h1 className={`text-2xl md:text-4xl font-bold ${
                     props.isDark ? "text-white" : "text-gray-800"
                 }`}>{props.title}</h1>
                 <p className={`text-sm  ${
